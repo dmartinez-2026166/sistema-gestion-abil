@@ -1,0 +1,3 @@
+drop database if exists sistema_gestion_abil_in4av;
+create database sistema_gestion_abil_in4av;
+use sistema_gestion_abil_in4av;
