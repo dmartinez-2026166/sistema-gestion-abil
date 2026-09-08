@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Informatica/Desktop/Jefferson%20Arriola%20VESPERTINA-2026135/semana%205/sistema-gestion-abil/sistema-gestion-abil/src/com/sistemaabil/system/utils/SceneManager.java</file>
+            <file>file:/C:/Users/Informatica/Desktop/Jefferson%20Arriola%20VESPERTINA-2026135/semana%205/sistema-gestion-abil/sistema-gestion-abil/src/com/sistemaabil/system/resources/images/user.png</file>
+            <file>file:/C:/Users/Informatica/Desktop/Jefferson%20Arriola%20VESPERTINA-2026135/semana%205/sistema-gestion-abil/sistema-gestion-abil/src/com/sistemaabil/system/utils/ViewFactory.java</file>
+            <file>file:/C:/Users/Informatica/Desktop/Jefferson%20Arriola%20VESPERTINA-2026135/semana%205/sistema-gestion-abil/sistema-gestion-abil/src/com/sistemaabil/system/resources/styles/RegisterUserStyles.css</file>
+            <file>file:/C:/Users/Informatica/Desktop/Jefferson%20Arriola%20VESPERTINA-2026135/semana%205/sistema-gestion-abil/sistema-gestion-abil/src/com/sistemaabil/system/repository/UserInterface.java</file>
+            <file>file:/C:/Users/Informatica/Desktop/Jefferson%20Arriola%20VESPERTINA-2026135/semana%205/sistema-gestion-abil/sistema-gestion-abil/src/com/sistemaabil/system/repository/UserRepository.java</file>
+            <file>file:/C:/Users/Informatica/Desktop/Jefferson%20Arriola%20VESPERTINA-2026135/semana%205/sistema-gestion-abil/sistema-gestion-abil/src/com/sistemaabil/system/service/UserStatus.java</file>
+            <file>file:/C:/Users/Informatica/Desktop/Jefferson%20Arriola%20VESPERTINA-2026135/semana%205/sistema-gestion-abil/sistema-gestion-abil/src/com/sistemaabil/system/resources/styles/LoginStyles.css</file>
+            <file>file:/C:/Users/Informatica/Desktop/Jefferson%20Arriola%20VESPERTINA-2026135/semana%205/sistema-gestion-abil/sistema-gestion-abil/src/com/sistemaabil/system/model/Model.java</file>
+        </group>
     </open-files>
 </project-private>
