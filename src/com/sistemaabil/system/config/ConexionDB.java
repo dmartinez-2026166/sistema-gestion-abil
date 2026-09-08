@@ -27,7 +27,7 @@ public class ConexionDB {
             instanciaConexionDB = new ConexionDB();
         }
         return instanciaConexionDB;
-
+        
     }
 
     public Connection getConnection() {
