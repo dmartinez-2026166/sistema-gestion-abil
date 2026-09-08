@@ -1,6 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="274.0" spacing="10.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" />
+    <children>
+
+        <!-- Imagen / Logo -->
+        <ImageView fx:id="imgLogo" fitHeight="80.0" fitWidth="120.0" preserveRatio="true">
+         <image>
+            <Image url="@../resources/images/images.png" />
+         </image></ImageView>
+
+        <GridPane hgap="10.0" vgap="8.0">
+
+            <children>
+
+                <!-- Código -->
+                <Label text="CODIGO" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="txtCodigo" promptText="Código interno" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <!-- Dirección -->
+                <Label text="DIRECCION" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="txtDireccion" promptText="Dirección exacta" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <!-- Tipo -->
+                <Label text="TIPO" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <ComboBox fx:id="cmbTipo" prefWidth="170.0" promptText="Seleccione tipo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <!-- Área -->
+                <Label text="AREA (M²)" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="txtArea" promptText="Área en metros cuadrados" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                <!-- Precio -->
+                <Label text="PRECIO" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <TextField fx:id="txtPrecio" promptText="Precio de oferta" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                <!-- Estado -->
+                <Label text="ESTADO" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <ComboBox fx:id="cmbEstado" prefWidth="170.0" promptText="Seleccione estado" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+            </children>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+
+        </GridPane>
+
+        <!-- Botones -->
+        <HBox alignment="CENTER" spacing="5.0">
+
+            <children>
+
+                <Button fx:id="btnCancelar" text="CANCELAR" />
+
+                <Button fx:id="btnGuardar" text="GUARDAR" />
+
+            </children>
+
+        </HBox>
+
+    </children>
+
+</VBox>
