@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/diego/OneDrive%20-%20Fundación%20Kinal%20-Alumnos-/Escritorio/Taller/Bim%204/S%204/sistema-gestion-abil/src/com/sistemaabil/system/utils/ViewFactory.java</file>
             <file>file:/C:/Users/diego/OneDrive%20-%20Fundación%20Kinal%20-Alumnos-/Escritorio/Taller/Bim%204/S%204/sistema-gestion-abil/src/com/sistemaabil/system/ClasePrincipal.java</file>
             <file>file:/C:/Users/diego/OneDrive%20-%20Fundación%20Kinal%20-Alumnos-/Escritorio/Taller/Bim%204/S%204/sistema-gestion-abil/src/com/sistemaabil/system/view/LoginView.fxml</file>
@@ -11,6 +12,11 @@
             <file>file:/C:/Users/diego/OneDrive%20-%20Fundación%20Kinal%20-Alumnos-/Escritorio/Taller/Bim%204/S%204/sistema-gestion-abil/src/com/sistemaabil/system/controller/LoginController.java</file>
             <file>file:/C:/Users/diego/OneDrive%20-%20Fundación%20Kinal%20-Alumnos-/Escritorio/Taller/Bim%204/S%204/sistema-gestion-abil/src/com/sistemaabil/system/config/Enviroment.java</file>
             <file>file:/C:/Users/diego/OneDrive%20-%20Fundación%20Kinal%20-Alumnos-/Escritorio/Taller/Bim%204/S%204/sistema-gestion-abil/src/com/sistemaabil/system/config/ConexionDB.java</file>
+=======
+            <file>file:/C:/Users/Informatica/Desktop/2026534_VES/Proyecto%202/sistema-gestion-abil/src/com/sistemaabil/system/view/RegisterView.fxml</file>
+            <file>file:/C:/Users/Informatica/Desktop/2026534_VES/Proyecto%202/sistema-gestion-abil/src/com/sistemaabil/system/config/ConexionDB.java</file>
+            <file>file:/C:/Users/Informatica/Desktop/2026534_VES/Proyecto%202/sistema-gestion-abil/src/com/sistemaabil/system/config/ddl.sql</file>
+>>>>>>> 42cc7ba (Actualizacion de vista de registro y configuracion)
         </group>
     </open-files>
 </project-private>
