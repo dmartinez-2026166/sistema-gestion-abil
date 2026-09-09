@@ -11,12 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
-=======
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
->>>>>>> 32b26aa (feat: se agrego la vista del LoginView)
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemaabil.system.controller.LoginController">
    <children>
       <VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0">
          <children>
@@ -25,44 +20,32 @@
                   <Image url="@../resources/images/user.png" />
                </image>
             </ImageView>
-<<<<<<< HEAD
+            
             <Label fx:id="lblCorreo" text="Ingrese su correo">
-=======
-            <Label text="Ingrese su correo">
->>>>>>> 32b26aa (feat: se agrego la vista del LoginView)
                <font>
                   <Font name="Arial Black" size="32.0" />
                </font>
             </Label>
-<<<<<<< HEAD
+            
             <TextField fx:id="txtCorreo" prefHeight="2.0" prefWidth="500.0" />
+            
             <Label fx:id="lblPassword" text="Ingrese su clave">
-=======
-            <TextField prefHeight="2.0" prefWidth="500.0" />
-            <Label text="Ingrese su clave">
->>>>>>> 32b26aa (feat: se agrego la vista del LoginView)
                <font>
                   <Font name="Arial Black" size="33.0" />
                </font>
             </Label>
-<<<<<<< HEAD
+            
             <PasswordField fx:id="pwdPassword" />
+            
             <Button fx:id="btnIniciarSesion" mnemonicParsing="false" text="INICIAR SESION">
-=======
-            <PasswordField />
-            <Button mnemonicParsing="false" text="INICIAR SESION">
->>>>>>> 32b26aa (feat: se agrego la vista del LoginView)
                <font>
                   <Font name="SimSun" size="23.0" />
                </font>
             </Button>
+            
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-<<<<<<< HEAD
-                  <Hyperlink fx:id="lnkRegistro" text="¡Si no tienes cuenta, Registrate!" textFill="#ff6b00">
-=======
-                  <Hyperlink text="¡Si no tienes cuenta, Registrate!" textFill="#ff6b00">
->>>>>>> 32b26aa (feat: se agrego la vista del LoginView)
+                  <Hyperlink fx:id="lnkRegistro" onMouseClicked="#onRegister" text="¡Si no tienes cuenta, Registrate!" textFill="#ff6b00">
                      <font>
                         <Font name="Book Antiqua" size="18.0" />
                      </font>
