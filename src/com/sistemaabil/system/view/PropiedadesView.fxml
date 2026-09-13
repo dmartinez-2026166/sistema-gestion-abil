@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.sistemaabil.system.controller.PropiedadesController">
+
+    <children>
+
+        <VBox spacing="15"
+              AnchorPane.topAnchor="20"
+              AnchorPane.bottomAnchor="20"
+              AnchorPane.leftAnchor="20"
+              AnchorPane.rightAnchor="20">
+
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <!-- TÍTULO -->
+            <Label text="LISTADO DE PROPIEDADES"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+            <!-- TABLA -->
+            <GridPane hgap="1" vgap="1"
+                      style="-fx-background-color: #bdbdbd;">
+
+                <!-- ENCABEZADOS -->
+                <Label text="Código"
+                       GridPane.columnIndex="0"
+                       GridPane.rowIndex="0"
+                       style="-fx-background-color: #eeeeee; -fx-font-weight: bold; -fx-padding: 10;"/>
+
+                <Label text="Dirección"
+                       GridPane.columnIndex="1"
+                       GridPane.rowIndex="0"
+                       style="-fx-background-color: #eeeeee; -fx-font-weight: bold; -fx-padding: 10;"/>
+
+                <Label text="Tipo"
+                       GridPane.columnIndex="2"
+                       GridPane.rowIndex="0"
+                       style="-fx-background-color: #eeeeee; -fx-font-weight: bold; -fx-padding: 10;"/>
+
+                <Label text="Área (m²)"
+                       GridPane.columnIndex="3"
+                       GridPane.rowIndex="0"
+                       style="-fx-background-color: #eeeeee; -fx-font-weight: bold; -fx-padding: 10;"/>
+
+                <Label text="Precio"
+                       GridPane.columnIndex="4"
+                       GridPane.rowIndex="0"
+                       style="-fx-background-color: #eeeeee; -fx-font-weight: bold; -fx-padding: 10;"/>
+
+                <Label text="Estado"
+                       GridPane.columnIndex="5"
+                       GridPane.rowIndex="0"
+                       style="-fx-background-color: #eeeeee; -fx-font-weight: bold; -fx-padding: 10;"/>
+
+
+                <!-- FILA 1 -->
+                <Label text="P001"
+                       GridPane.columnIndex="0"
+                       GridPane.rowIndex="1"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+                <Label text="Zona 10, Ciudad de Guatemala"
+                       GridPane.columnIndex="1"
+                       GridPane.rowIndex="1"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+                <Label text="Casa"
+                       GridPane.columnIndex="2"
+                       GridPane.rowIndex="1"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+                <Label text="150"
+                       GridPane.columnIndex="3"
+                       GridPane.rowIndex="1"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+                <Label text="Q500,000"
+                       GridPane.columnIndex="4"
+                       GridPane.rowIndex="1"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+                <Label text="Disponible"
+                       GridPane.columnIndex="5"
+                       GridPane.rowIndex="1"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+
+                <!-- FILA 2 -->
+                <Label text="P002"
+                       GridPane.columnIndex="0"
+                       GridPane.rowIndex="2"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+                <Label text="Zona 1, Ciudad de Guatemala"
+                       GridPane.columnIndex="1"
+                       GridPane.rowIndex="2"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+                <Label text="Apartamento"
+                       GridPane.columnIndex="2"
+                       GridPane.rowIndex="2"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+                <Label text="80"
+                       GridPane.columnIndex="3"
+                       GridPane.rowIndex="2"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+                <Label text="Q250,000"
+                       GridPane.columnIndex="4"
+                       GridPane.rowIndex="2"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+                <Label text="Disponible"
+                       GridPane.columnIndex="5"
+                       GridPane.rowIndex="2"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+
+                <!-- FILA 3 -->
+                <Label text="P003"
+                       GridPane.columnIndex="0"
+                       GridPane.rowIndex="3"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+                <Label text="Zona 15, Ciudad de Guatemala"
+                       GridPane.columnIndex="1"
+                       GridPane.rowIndex="3"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+                <Label text="Terreno"
+                       GridPane.columnIndex="2"
+                       GridPane.rowIndex="3"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+                <Label text="300"
+                       GridPane.columnIndex="3"
+                       GridPane.rowIndex="3"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+                <Label text="Q350,000"
+                       GridPane.columnIndex="4"
+                       GridPane.rowIndex="3"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+                <Label text="Vendido"
+                       GridPane.columnIndex="5"
+                       GridPane.rowIndex="3"
+                       style="-fx-background-color: white; -fx-padding: 10;"/>
+
+            </GridPane>
+
+            <!-- BOTONES -->
+            <HBox spacing="10">
+
+                <Button text="Agregar propiedad"
+                        prefWidth="150"
+                        prefHeight="35"/>
+
+                <Button text="Editar"
+                        prefWidth="100"
+                        prefHeight="35"/>
+
+                <Button text="Eliminar"
+                        prefWidth="100"
+                        prefHeight="35"/>
+
+            </HBox>
+
+        </VBox>
+
+    </children>
+
+</AnchorPane>
