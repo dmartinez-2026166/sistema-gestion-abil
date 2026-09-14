@@ -1,4 +1,4 @@
-src/com/sistemaabil/system/config/Enviroment.java
+src/com/sistemaabil/system/config/Environment.java
 dist/*
 build/*
 /nbproject/private/
