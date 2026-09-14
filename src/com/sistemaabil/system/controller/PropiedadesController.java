@@ -47,6 +47,21 @@ public class PropiedadesController {
         configurarColumnas();
         cargarDatosEjemplo();
     }
+    
+    @FXML
+private void agregarPropiedad() {
+    System.out.println("Botón Agregar presionado");
+}
+
+@FXML
+private void editarPropiedad() {
+    System.out.println("Botón Editar presionado");
+}
+
+@FXML
+private void eliminarPropiedad() {
+    System.out.println("Botón Eliminar presionado");
+}
 
     private void configurarColumnas() {
         colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));

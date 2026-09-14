@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+
 <AnchorPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.sistemaabil.system.controller.PropiedadesController">
@@ -164,18 +165,23 @@
             <!-- BOTONES -->
             <HBox spacing="10">
 
-                <Button text="Agregar propiedad"
-                        prefWidth="150"
-                        prefHeight="35"/>
+                 <Button fx:id="btnAgregar"
+            text="Agregar propiedad"
+            prefWidth="150"
+            prefHeight="35"
+            onAction="#agregarPropiedad"/>
 
-                <Button text="Editar"
-                        prefWidth="100"
-                        prefHeight="35"/>
+    <Button fx:id="btnEditar"
+            text="Editar"
+            prefWidth="100"
+            prefHeight="35"
+            onAction="#editarPropiedad"/>
 
-                <Button text="Eliminar"
-                        prefWidth="100"
-                        prefHeight="35"/>
-
+    <Button fx:id="btnEliminar"
+            text="Eliminar"
+            prefWidth="100"
+            prefHeight="35"
+            onAction="#eliminarPropiedad"/>
             </HBox>
 
         </VBox>
