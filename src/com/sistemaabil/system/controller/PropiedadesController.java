@@ -41,28 +41,7 @@ public class PropiedadesController {
 
     private final ObservableList<PropiedadFila> propiedades =
             FXCollections.observableArrayList();
-
-    @FXML
-    public void initialize() {
-        configurarColumnas();
-        cargarDatosEjemplo();
-    }
-    
-    @FXML
-private void agregarPropiedad() {
-    System.out.println("Botón Agregar presionado");
-}
-
-@FXML
-private void editarPropiedad() {
-    System.out.println("Botón Editar presionado");
-}
-
-@FXML
-private void eliminarPropiedad() {
-    System.out.println("Botón Eliminar presionado");
-}
-
+   
     private void configurarColumnas() {
         colCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
         colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
@@ -73,18 +52,7 @@ private void eliminarPropiedad() {
         tblPropiedades.setItems(propiedades);
     }
 
-    private void cargarDatosEjemplo() {
-        propiedades.clear();
-        propiedades.add(new PropiedadFila("P001", "Zona 10, Guatemala", "Casa", "150", "Q500,000", "Disponible"));
-        propiedades.add(new PropiedadFila("P002", "Zona 11, Guatemala", "Apartamento", "85", "Q350,000", "Disponible"));
-        propiedades.add(new PropiedadFila("P003", "Mixco, Guatemala", "Terreno", "300", "Q250,000", "Vendido"));
-    }
-
-    @FXML
-    private void actualizarTabla(ActionEvent event) {
-        cargarDatosEjemplo();
-    }
-
+   
     @FXML
     private void cerrar(ActionEvent event) {
         Stage stage = (Stage) btnCerrar.getScene().getWindow();
