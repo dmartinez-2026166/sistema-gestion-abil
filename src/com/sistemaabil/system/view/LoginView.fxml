@@ -20,7 +20,7 @@
                   <Image url="@../resources/images/user.png" />
                </image>
             </ImageView>
-            <Label text="Ingrese su correo">
+            <Label text="Ingrese su usuario">
                <font>
                   <Font name="Arial Black" size="32.0" />
                </font>
