@@ -3,10 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/diego/OneDrive/Desktop/Taller/Bim%204/S4/sistema-gestion-abil/src/com/sistemaabil/system/config/ddl.sql</file>
             <file>file:/C:/Users/diego/OneDrive/Desktop/Taller/Bim%204/S4/sistema-gestion-abil/src/com/sistemaabil/system/config/ConexionDB.java</file>
             <file>file:/C:/Users/diego/OneDrive/Desktop/Taller/Bim%204/S4/sistema-gestion-abil/src/com/sistemaabil/system/controller/LoginController.java</file>
             <file>file:/C:/Users/diego/OneDrive/Desktop/Taller/Bim%204/S4/sistema-gestion-abil/src/com/sistemaabil/system/config/Enviroment.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/Informatica/Desktop/Jefferson%20Arriola%20VESPERTINA-2026135/Jefferson%20Arriola%20VESPERTINA-2026135/semana%205/sistema-gestion-abil/src/com/sistemaabil/system/model/Model.java</file>
+=======
+            <file>file:/C:/Users/Informatica/Desktop/2026534_VES/Proyecto%202/sistema-gestion-abil/src/com/sistemaabil/system/controller/PropiedadesController.java</file>
+>>>>>>> origin/develop
+>>>>>>> 578177c09aa1a4c9ad0ec597785d7a93f098c88c
         </group>
     </open-files>
 </project-private>
