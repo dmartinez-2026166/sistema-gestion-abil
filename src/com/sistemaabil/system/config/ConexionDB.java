@@ -21,7 +21,7 @@ public class ConexionDB {
             System.out.println("error padre" + e.getMessage());
         }
     }
-
+    
     public static ConexionDB getInstanciaConexionDB() {
         if (instanciaConexionDB == null) {
             instanciaConexionDB = new ConexionDB();
@@ -29,7 +29,7 @@ public class ConexionDB {
         return instanciaConexionDB;
         
     }
-
+    
     public Connection getConnection() {
         return connection;
     }

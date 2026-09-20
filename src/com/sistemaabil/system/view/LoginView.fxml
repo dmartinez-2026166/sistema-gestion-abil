@@ -11,14 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity"
-      maxWidth="-Infinity"
-      minHeight="-Infinity"
-      minWidth="-Infinity"
-      prefHeight="500.0"
-      prefWidth="500.0"
-      xmlns="http://javafx.com/javafx/21.0.1"
-      xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jeffersonarriola.system.controller.LoginController">
 
    <children>
 
@@ -36,6 +29,8 @@
                   <Image url="@../resources/images/user.png" />
                </image>
             </ImageView>
+
+            <Label text="Ingrese su usuario">
 
             <Label fx:id="lblCorreo"
                    text="Ingrese su correo">
