@@ -1,13 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.sistemaabil.system.repository;
 
-/**
- *
- * @author diego
- */
+import com.sistemaabil.system.model.Usuario;
+
 public interface UserInterface {
+
+
+    boolean crearUsuario(String usuario, String claveTextoPlano, String correo, String rol);
+
     
+    Usuario buscarPorCorreo(String correo);
+
+    Usuario autenticar(String correo, String claveTextoPlano);
 }
