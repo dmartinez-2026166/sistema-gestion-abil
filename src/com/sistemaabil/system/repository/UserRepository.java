@@ -8,13 +8,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * NOTA IMPORTANTE PARA CORRER ESTA CLASE:
- * Necesita las librerias bcrypt-0.10.2.jar y bytes-1.6.1.jar en el Classpath
- * del proyecto (Properties > Libraries > Classpath > Add JAR/Folder), tal
- * como pide el repositorio guia del profe. Sin esos jars, esta clase no
- * compila.
- */
 public class UserRepository implements UserInterface {
 
     @Override
@@ -27,7 +20,6 @@ public class UserRepository implements UserInterface {
         }
 
         if (buscarPorCorreo(correo) != null) {
-            // ya existe un usuario con ese correo
             return false;
         }
 
