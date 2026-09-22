@@ -36,15 +36,25 @@ public class ViewFactory {
         try {
             switch (nameFile) {
                 case "login" -> scene = loadFileFXML("LoginView.fxml", 400, 500);
-                case "propiedades" -> {
-                    SceneManager.getInstanciaSceneManager().getStagePrincipal().setTitle("LISTADO DE PROPIEDADES");
-                    SceneManager.getInstanciaSceneManager().getStagePrincipal().setResizable(true);
-                    scene = loadFileFXML("PropiedadesView.fxml", 850, 500);
-                }
                 case "register" -> {
-                    SceneManager.getInstanciaSceneManager().getStagePrincipal().setTitle("REGISTRO DE USUARIO");
+                    SceneManager.getInstanciaSceneManager().getStagePrincipal().setTitle("REGISTRO DE PROPIEDAD");
                     SceneManager.getInstanciaSceneManager().getStagePrincipal().setResizable(false);
                     scene = loadFileFXML("RegisterView.fxml", 350, 400);
+                }
+                case "registerUser" -> {
+                    SceneManager.getInstanciaSceneManager().getStagePrincipal().setTitle("REGISTRO DE USUARIO");
+                    SceneManager.getInstanciaSceneManager().getStagePrincipal().setResizable(false);
+                    scene = loadFileFXML("RegisterUserView.fxml", 350, 420);
+                }
+                case "panel" -> {
+                    SceneManager.getInstanciaSceneManager().getStagePrincipal().setTitle("PANEL DE CONTROL");
+                    SceneManager.getInstanciaSceneManager().getStagePrincipal().setResizable(true);
+                    scene = loadFileFXML("PanelControl.fxml", 700, 700);
+                }
+                case "busqueda" -> {
+                    SceneManager.getInstanciaSceneManager().getStagePrincipal().setTitle("BUSCAR PROPIEDAD");
+                    SceneManager.getInstanciaSceneManager().getStagePrincipal().setResizable(true);
+                    scene = loadFileFXML("BusquedaPropiedadesView.fxml", 650, 500);
                 }
                 default -> scene = loadFileFXML("LoginView.fxml", 400, 500);
             }
@@ -55,12 +65,20 @@ public class ViewFactory {
         }
     }
 
-    public void viewPropiedades() {
-        loadScene("propiedades");
-    }
-
     public void viewRegister() {
         loadScene("register");
+    }
+
+    public void viewRegisterUser() {
+        loadScene("registerUser");
+    }
+
+    public void viewPanel() {
+        loadScene("panel");
+    }
+
+    public void viewBusquedaPropiedades() {
+        loadScene("busqueda");
     }
 
     public void viewLogin() {

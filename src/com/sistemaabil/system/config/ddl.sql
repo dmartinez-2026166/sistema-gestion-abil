@@ -5,8 +5,8 @@ use sistema_gestion_abil_in4av;
 create table Usuario (
 id_usuario int auto_increment primary key,
 usuario varchar(50) not null,
-clave varchar(36) not null,
-correo varchar(100) not null,
+clave varchar(60) not null,
+correo varchar(100) not null unique,
 rol varchar(30) not null
 );
 
@@ -36,6 +36,7 @@ foreign key (id_usuario)
 
 create table Propiedad(
 id_propiedad int auto_increment primary key,
+codigo_interno varchar(20) not null unique,
 direccion varchar(150),
 precio decimal(10,2),
 tipo_propiedad varchar(50),
@@ -46,12 +47,12 @@ estado_propiedad varchar(100)
 #-------------USUARIOS--------------------------------------------------
 delimiter $$
 create procedure sp_crear_usuarios(in usuario_p varchar(50),
-								   in clave_p varchar(36),
+								   in clave_p varchar(60),
                                    in correo_p varchar(100),
                                    in rol_p varchar(30))
 begin
-	insert into Usuario (id_usuario, usuario, clave, correo, rol)
-		values(id_usuario, usuario_p, clave_p, correo_p, rol_p);
+	insert into Usuario (usuario, clave, correo, rol)
+		values(usuario_p, clave_p, correo_p, rol_p);
         
 end$$
 delimiter ;
@@ -67,18 +68,28 @@ begin
 end$$
 delimiter ;
 
+delimiter $$
+create procedure sp_buscar_usuario_por_correo(in correo_p varchar(100))
+begin
+	select id_usuario, usuario, clave, correo, rol
+    from Usuario
+    where correo = correo_p;
+end$$
+delimiter ;
+
 #----------------------AGENTE INMOBILIARIO--------------------------------------
 
 delimiter $$
-create procedure sp_crear_propiedad(in direccion_p varchar(150),
+create procedure sp_crear_propiedad(in codigo_p varchar(20),
+									in direccion_p varchar(150),
 									in precio_p decimal(10,2),
 									in tipo_p varchar(50),
 									in area_p decimal(10,2),
 									in estado_p varchar(100))
 
 begin
-	insert into Propiedad(direccion, precio, tipo_propiedad, area, estado_propiedad)
-		values(direccion_p, precio_p, tipo_p, area_p, estado_p);
+	insert into Propiedad(codigo_interno, direccion, precio, tipo_propiedad, area, estado_propiedad)
+		values(codigo_p, direccion_p, precio_p, tipo_p, area_p, estado_p);
 
 end$$
 delimiter ;
@@ -177,6 +188,16 @@ begin
         estado_propiedad = estado_p
     where id_propiedad = id_propiedad_p;
 
+end$$
+delimiter ;
+
+delimiter $$
+create procedure sp_buscar_propiedades(in termino_p varchar(150))
+begin
+	select id_propiedad, codigo_interno, direccion, precio, tipo_propiedad, area, estado_propiedad
+    from Propiedad
+    where codigo_interno like concat('%', termino_p, '%')
+       or direccion like concat('%', termino_p, '%');
 end$$
 delimiter ;
 
