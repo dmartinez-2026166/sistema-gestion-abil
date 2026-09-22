@@ -2,9 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
-            <file>file:/C:/Users/HP/Desktop/Cristopher%20Cruz%20-%202026541/sistema-gestion-abil-S7/src/com/sistemaabil/system/config/ConexionDB.java</file>
-            <file>file:/C:/Users/HP/Desktop/Cristopher%20Cruz%20-%202026541/sistema-gestion-abil-S7/src/com/sistemaabil/system/config/Enviroment.java</file>
+            <file>file:/C:/Users/diego/OneDrive/Desktop/Taller/Bim%204/S4/sistema-gestion-abil/src/com/sistemaabil/system/config/ddl.sql</file>
+            <file>file:/C:/Users/diego/OneDrive/Desktop/Taller/Bim%204/S4/sistema-gestion-abil/src/com/sistemaabil/system/view/LoginView.fxml</file>
+            <file>file:/C:/Users/diego/OneDrive/Desktop/Taller/Bim%204/S4/sistema-gestion-abil/src/com/sistemaabil/system/controller/PropiedadesController.java</file>
+            <file>file:/C:/Users/diego/OneDrive/Desktop/Taller/Bim%204/S4/sistema-gestion-abil/src/com/sistemaabil/system/config/ConexionDB.java</file>
+            <file>file:/C:/Users/diego/OneDrive/Desktop/Taller/Bim%204/S4/sistema-gestion-abil/src/com/sistemaabil/system/controller/LoginController.java</file>
+            <file>file:/C:/Users/diego/OneDrive/Desktop/Taller/Bim%204/S4/sistema-gestion-abil/src/com/sistemaabil/system/config/Enviroment.java</file>
+            <file>file:/C:/Users/diego/OneDrive/Desktop/Taller/Bim%204/S4/sistema-gestion-abil/src/com/sistemaabil/system/ClasePrincipal.java</file>
         </group>
+=======
+        <group/>
+>>>>>>> b7453eb (feat: se actualizó el archivo .gitignore)
     </open-files>
 </project-private>
