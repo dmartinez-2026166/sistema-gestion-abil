@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemaabil.system.controller.PanelControlController">
    <top>
       <VBox prefHeight="135.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -28,7 +28,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" prefWidth="103.0" text="CERRAR SESIÓN" />
+                  <Button fx:id="btnCerrarSesion" mnemonicParsing="false" onAction="#onCerrarSesion" prefWidth="103.0" text="CERRAR SESIÓN" />
                </children>
             </HBox>
             <Separator prefWidth="200.0" />
@@ -44,25 +44,25 @@
                </font>
             </Label>
             <Separator prefWidth="200.0" />
-            <Button mnemonicParsing="false" text="Propiedades">
+            <Button fx:id="btnFiltroTodas" mnemonicParsing="false" onAction="#onFiltroTodas" text="Propiedades">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>
             </Button>
             <Separator prefWidth="200.0" />
-            <Button mnemonicParsing="false" text="Disponibles">
+            <Button fx:id="btnFiltroDisponibles" mnemonicParsing="false" onAction="#onFiltroDisponibles" text="Disponibles">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Button>
             <Separator prefWidth="200.0" />
-            <Button mnemonicParsing="false" text="Vendidas">
+            <Button fx:id="btnFiltroVendidas" mnemonicParsing="false" onAction="#onFiltroVendidas" text="Vendidas">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
             </Button>
             <Separator prefWidth="200.0" />
-            <Button mnemonicParsing="false" text="Alquiladas">
+            <Button fx:id="btnFiltroAlquiladas" mnemonicParsing="false" onAction="#onFiltroAlquiladas" text="Alquiladas">
                <font>
                   <Font name="Arial Black" size="15.0" />
                </font>
@@ -72,7 +72,7 @@
       </VBox>
    </left>
    <center>
-      <VBox alignment="CENTER" prefHeight="565.0" prefWidth="527.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="565.0" prefWidth="527.0" spacing="8.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -90,45 +90,50 @@
                         </Label>
                      </children>
                   </VBox>
-                  <Button mnemonicParsing="false" text="Nueva propiedad" textFill="#000dff">
+                  <Button fx:id="btnNuevaPropiedad" mnemonicParsing="false" onAction="#onNuevaPropiedad" text="Nueva propiedad" textFill="#000dff">
                      <font>
                         <Font name="Arial Black" size="16.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="40.0" prefWidth="200.0" spacing="5.0">
                <children>
-                  <TextField prefHeight="25.0" prefWidth="161.0" />
-                  <ComboBox prefHeight="25.0" prefWidth="138.0" promptText="Tipo de inmueble" />
-                  <ComboBox prefHeight="25.0" prefWidth="80.0" promptText="Estado" />
-                  <Button mnemonicParsing="false" text="Buscar" />
+                  <TextField fx:id="txtBuscar" prefHeight="25.0" prefWidth="200.0" promptText="Código o dirección" />
+                  <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#onBuscar" text="Buscar" />
                </children>
             </HBox>
+            <Label fx:id="lblMensaje" textFill="RED" />
             <Separator prefWidth="200.0" />
-            <TableView prefHeight="200.0" prefWidth="444.0">
+            <TableView fx:id="tblPropiedades" prefHeight="280.0" prefWidth="444.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Código" />
-                <TableColumn prefWidth="75.0" text="Dirección" />
-                  <TableColumn prefWidth="75.0" text="Tipo" />
-                  <TableColumn prefWidth="75.0" text="Área (m^2)" />
-                  <TableColumn prefWidth="98.0" text="Precio de oferta" />
-                  <TableColumn prefWidth="72.0" text="Estado" />
-                  <TableColumn prefWidth="78.0" text="Acciones" />
+                <TableColumn fx:id="colCodigo" prefWidth="80.0" text="Código" />
+                <TableColumn fx:id="colDireccion" prefWidth="130.0" text="Dirección" />
+                  <TableColumn fx:id="colTipo" prefWidth="90.0" text="Tipo" />
+                  <TableColumn fx:id="colArea" prefWidth="75.0" text="Área (m²)" />
+                  <TableColumn fx:id="colPrecio" prefWidth="95.0" text="Precio" />
+                  <TableColumn fx:id="colEstado" prefWidth="75.0" text="Estado" />
               </columns>
             </TableView>
-            <Button mnemonicParsing="false" text="VER">
-               <font>
-                  <Font name="Arial Black" size="15.0" />
-               </font></Button>
-            <Button mnemonicParsing="false" text="EDITAR">
-               <font>
-                  <Font name="Arial Black" size="15.0" />
-               </font></Button>
-            <Button mnemonicParsing="false" text="ELIMINAR">
-               <font>
-                  <Font name="Arial Black" size="15.0" />
-               </font></Button>
+            <HBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Button fx:id="btnVer" mnemonicParsing="false" onAction="#onVer" text="VER">
+                     <font>
+                        <Font name="Arial Black" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#onEditar" text="EDITAR">
+                     <font>
+                        <Font name="Arial Black" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#onEliminar" text="ELIMINAR">
+                     <font>
+                        <Font name="Arial Black" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </center>

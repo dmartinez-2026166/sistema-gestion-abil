@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.sistemaabil.system.repository;
 
 import com.sistemaabil.system.config.ConexionDB;
@@ -15,11 +11,6 @@ import java.util.List;
 
 public class PropiedadRepository {
 
-    /**
-     * Lista todas las propiedades. Si estado es null o "Todos", trae todo
-     * el inventario; si no, filtra por ese estado (Disponible/Vendido/
-     * Alquilado) usando los SP del supervisor, que hacen lo mismo.
-     */
     public List<Propiedad> listarPorEstado(String estado) {
         String procedimiento;
 
@@ -37,10 +28,6 @@ public class PropiedadRepository {
         return ejecutarConsultaSinParametros(procedimiento);
     }
 
-    /**
-     * Busca propiedades cuyo codigo interno o direccion contengan el
-     * termino dado. Si el termino viene vacio, devuelve todas.
-     */
     public List<Propiedad> buscarPorCodigoODireccion(String termino) {
         List<Propiedad> resultado = new ArrayList<>();
         Connection connection = ConexionDB.getInstanciaConexionDB().getConnection();
@@ -143,4 +130,3 @@ public class PropiedadRepository {
         );
     }
 }
-

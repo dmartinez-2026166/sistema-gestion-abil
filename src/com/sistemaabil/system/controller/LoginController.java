@@ -2,6 +2,7 @@ package com.sistemaabil.system.controller;
 
 import com.sistemaabil.system.model.Usuario;
 import com.sistemaabil.system.repository.UserRepository;
+import com.sistemaabil.system.utils.Sesion;
 import com.sistemaabil.system.utils.ViewFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,22 +33,8 @@ public class LoginController implements Initializable {
     @FXML
     private Hyperlink lnkRegistro;
 
-/**
- *
- * @author diego
- */
-public class LoginController implements Initializable {
-    
-         @Override
-         public void initialize(URL url, ResourceBundle rb) {
-        
-         }
-         
-        @FXML
-        public void onRegister(MouseEvent event){
-        ViewFactory viewFacto = new ViewFactory();
-        viewFacto.viewRegister();
-    }
+    @FXML
+    private PasswordField pwdPassword;
 
     @FXML
     private TextField txtCorreo;
@@ -79,8 +66,14 @@ public class LoginController implements Initializable {
         }
 
         mostrarError("");
+        Sesion.setUsuarioActual(usuario);
         ViewFactory viewFacto = new ViewFactory();
-        viewFacto.viewPanel();
+
+        switch (usuario.getRol()) {
+            case "Administrador" -> viewFacto.viewPanel();
+            case "Agente Inmobiliario", "Supervisor", "Cliente" -> viewFacto.viewBusquedaPropiedades();
+            default -> mostrarError("Rol desconocido: " + usuario.getRol());
+        }
     }
 
     @FXML
