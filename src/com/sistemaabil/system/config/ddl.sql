@@ -11,27 +11,27 @@ rol varchar(30) not null
 );
 
 create table Administrador(
-id_usuario int,
-foreign key(id_usuario)
-	references Usuario(id_usuario)
+	id_usuario int,
+	foreign key(id_usuario)
+		references Usuario(id_usuario)
 );
 
 create table Supervisor(
-id_usuario int primary key,
-foreign key (id_usuario)
-	references Usuario(id_usuario)
+	id_usuario int primary key,
+	foreign key (id_usuario)
+		references Usuario(id_usuario)
 );
 
 create table Cliente(
-id_usuario  int primary key,
-foreign key (id_usuario)
-	references Usuario(id_usuario)
+	id_usuario  int primary key,
+	foreign key (id_usuario)
+		references Usuario(id_usuario)
 );
 
 create table Agente_inmobiliario(
-id_usuario int primary key,
-foreign key (id_usuario)
-	references Usuario(id_usuario)
+	id_usuario int primary key,
+	foreign key (id_usuario)
+		references Usuario(id_usuario)
 );
 
 create table Propiedad(
@@ -60,12 +60,20 @@ delimiter ;
 #-------------------ADMINISTRADOR-------------------------------------
 
 delimiter $$
-create procedure sp_leer_usuarios(in id_usuario_p int)
+	create procedure sp_leer_usuarios(in id_usuario_p int)
+		begin
+			select * from Usuario
+		where id_usuario = id_usuario_p;
+	end$$
+delimiter ;
 
-begin
-	select * from Usuario
-    where id_usuario = id_usuario_p;
-end$$
+delimiter $$
+	create procedure sp_buscar_usuario_por_correo(in correo_p varchar(100))
+		begin
+			select id_usuario, usuario, clave, correo, rol
+			from Usuario
+		where correo = correo_p;
+	end$$
 delimiter ;
 
 delimiter $$
@@ -95,100 +103,86 @@ end$$
 delimiter ;
 
 delimiter $$
-create procedure sp_leer_propiedades()
-begin
-
-    select * from Propiedad;
-
-end$$
+	create procedure sp_leer_propiedades()
+	begin
+		select * from Propiedad;
+	end$$
 delimiter ;
 
 delimiter $$
-create procedure sp_actualizar_propiedad(in id_propiedad_p int,
-										 in direccion_p varchar(150),
-										 in precio_p decimal(10,2),
-										 in tipo_p varchar(50),
-										 in area_p decimal(10,2),
-										 in estado_p varchar(100))
-begin
-    update Propiedad
-	set	direccion = direccion_p,
-        precio = precio_p,
-        tipo_propiedad = tipo_p,
-        area = area_p,
-        estado_propiedad = estado_p
-    where id_propiedad = id_propiedad_p;
-
-end$$
+	create procedure sp_actualizar_propiedad(in id_propiedad_p int,
+											in direccion_p varchar(150),
+											in precio_p decimal(10,2),
+											in tipo_p varchar(50),
+											in area_p decimal(10,2),
+											in estado_p varchar(100))
+	begin
+		update Propiedad
+		set	direccion = direccion_p,
+			precio = precio_p,
+			tipo_propiedad = tipo_p,
+			area = area_p,
+			estado_propiedad = estado_p
+		where id_propiedad = id_propiedad_p;
+	end$$
 delimiter ;
 
 delimiter $$
-create procedure sp_eliminar_propiedad(in id_propiedad_p int)
-
-begin
-
-    delete from Propiedad
-    where id_propiedad = id_propiedad_p;
-
-end$$
+	create procedure sp_eliminar_propiedad(in id_propiedad_p int)
+	begin
+		delete from Propiedad
+		where id_propiedad = id_propiedad_p;
+	end$$
 delimiter ;
 
 #--------------------------SUPERVISOR-----------------------------------
 delimiter $$
-create procedure sp_supervisor_leer_propiedades()
-begin
-    select*from Propiedad;
-
-end$$
+	create procedure sp_supervisor_leer_propiedades()
+	begin
+		select*from Propiedad;
+	end$$
 delimiter ;
 
 delimiter $$
-create procedure sp_supervisor_propiedades_disponibles()
-
-begin
-	select*from Propiedad
-    where estado_propiedad = 'Disponible';
-
-end$$
+	create procedure sp_supervisor_propiedades_disponibles()
+	begin
+		select*from Propiedad
+		where estado_propiedad = 'Disponible';
+	end$$
 delimiter ;
 
 delimiter $$
-create procedure sp_supervisor_propiedades_vendidos()
-
-begin
-	select*from Propiedad
-    where estado_propiedad = 'Vendido';
-
-end$$
+	create procedure sp_supervisor_propiedades_vendidos()
+	begin
+		select*from Propiedad
+		where estado_propiedad = 'Vendido';
+	end$$
 delimiter ;
 
 delimiter $$
-create procedure sp_supervisor_propiedades_alquilados()
-
-begin
-	select*from Propiedad
-    where estado_propiedad = 'Alquilado';
-
-end$$
+	create procedure sp_supervisor_propiedades_alquilados()
+	begin
+		select*from Propiedad
+		where estado_propiedad = 'Alquilado';
+	end$$
 delimiter ;
 
 delimiter $$
-create procedure sp_editar_propiedad(in id_propiedad_p int,
-									 in direccion_p varchar(150),
-									 in precio_p decimal(10,2),
-									 in tipo_p varchar(50),
-									 in area_p decimal(10,2),
-									 in estado_p varchar(100))
-begin
-    update Propiedad
-	set	direccion = direccion_p,
-        precio = precio_p,
-        tipo_propiedad = tipo_p,
-        area = area_p,
-        estado_propiedad = estado_p
-    where id_propiedad = id_propiedad_p;
-
-end$$
+	create procedure sp_editar_propiedad(in id_propiedad_p int,
+										in direccion_p varchar(150),
+										in precio_p decimal(10,2),
+										in tipo_p varchar(50),
+										in area_p decimal(10,2),
+										in estado_p varchar(100))
+	begin
+		update Propiedad
+		set	direccion = direccion_p,
+			precio = precio_p,
+			tipo_propiedad = tipo_p,
+			area = area_p,
+			estado_propiedad = estado_p
+		where id_propiedad = id_propiedad_p;
+	end$$
 delimiter ;
 
 delimiter $$
@@ -204,12 +198,11 @@ delimiter ;
 #-------------------CLIENTE-----------------------------
 
 delimiter $$
-create procedure sp_cliente_ver_propiedades()
-begin
-	select id_propiedad, direccion, precio, tipo_propiedad, area,
-        estado_propiedad
-    from Propiedad
-    where estado_propiedad = 'Disponible';
-
-end$$
+	create procedure sp_cliente_ver_propiedades()
+	begin
+		select id_propiedad, direccion, precio, tipo_propiedad, area,
+			estado_propiedad
+		from Propiedad
+		where estado_propiedad = 'Disponible';
+	end$$
 delimiter ;
