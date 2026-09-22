@@ -32,8 +32,22 @@ public class LoginController implements Initializable {
     @FXML
     private Hyperlink lnkRegistro;
 
-    @FXML
-    private PasswordField pwdPassword;
+/**
+ *
+ * @author diego
+ */
+public class LoginController implements Initializable {
+    
+         @Override
+         public void initialize(URL url, ResourceBundle rb) {
+        
+         }
+         
+        @FXML
+        public void onRegister(MouseEvent event){
+        ViewFactory viewFacto = new ViewFactory();
+        viewFacto.viewRegister();
+    }
 
     @FXML
     private TextField txtCorreo;
