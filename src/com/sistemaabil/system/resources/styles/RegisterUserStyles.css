@@ -1,0 +1,12 @@
+.register-root {
+    -fx-background-color: -color-bg;
+}
+
+.register-card {
+    -fx-max-width: 340;
+}
+
+.register-title {
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}

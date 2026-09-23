@@ -3,11 +3,11 @@ create database sistema_gestion_abil_in4av;
 use sistema_gestion_abil_in4av;
 
 create table Usuario (
-id_usuario int auto_increment primary key,
-usuario varchar(50) not null,
-clave varchar(60) not null,
-correo varchar(100) not null unique,
-rol varchar(30) not null
+	id_usuario int auto_increment primary key,
+	usuario varchar(50) not null,
+	clave varchar(60) not null,
+	correo varchar(100) not null unique,
+	rol varchar(30) not null
 );
 
 create table Administrador(
@@ -35,26 +35,25 @@ create table Agente_inmobiliario(
 );
 
 create table Propiedad(
-id_propiedad int auto_increment primary key,
-codigo_interno varchar(20) not null unique,
-direccion varchar(150),
-precio decimal(10,2),
-tipo_propiedad varchar(50),
-area decimal(10,2),
-estado_propiedad varchar(100)
+	id_propiedad int auto_increment primary key,
+	codigo_interno varchar(20) not null unique,
+	direccion varchar(150),
+	precio decimal(10,2),
+	tipo_propiedad varchar(50),
+	area decimal(10,2),
+	estado_propiedad varchar(100)
 );
 
 #-------------USUARIOS--------------------------------------------------
 delimiter $$
-create procedure sp_crear_usuarios(in usuario_p varchar(50),
-								   in clave_p varchar(60),
-                                   in correo_p varchar(100),
-                                   in rol_p varchar(30))
-begin
-	insert into Usuario (usuario, clave, correo, rol)
+	create procedure sp_crear_usuarios(in usuario_p varchar(50),
+									in clave_p varchar(60),
+									in correo_p varchar(100),
+									in rol_p varchar(30))
+	begin
+		insert into Usuario (usuario, clave, correo, rol)
 		values(usuario_p, clave_p, correo_p, rol_p);
-        
-end$$
+	end$$
 delimiter ;
 
 #-------------------ADMINISTRADOR-------------------------------------
@@ -76,30 +75,19 @@ delimiter $$
 	end$$
 delimiter ;
 
-delimiter $$
-create procedure sp_buscar_usuario_por_correo(in correo_p varchar(100))
-begin
-	select id_usuario, usuario, clave, correo, rol
-    from Usuario
-    where correo = correo_p;
-end$$
-delimiter ;
-
 #----------------------AGENTE INMOBILIARIO--------------------------------------
 
 delimiter $$
-create procedure sp_crear_propiedad(in codigo_p varchar(20),
-									in direccion_p varchar(150),
-									in precio_p decimal(10,2),
-									in tipo_p varchar(50),
-									in area_p decimal(10,2),
-									in estado_p varchar(100))
-
-begin
-	insert into Propiedad(codigo_interno, direccion, precio, tipo_propiedad, area, estado_propiedad)
+	create procedure sp_crear_propiedad(in codigo_p varchar(20),
+										in direccion_p varchar(150),
+										in precio_p decimal(10,2),
+										in tipo_p varchar(50),
+										in area_p decimal(10,2),
+										in estado_p varchar(100))
+	begin
+		insert into Propiedad(codigo_interno, direccion, precio, tipo_propiedad, area, estado_propiedad)
 		values(codigo_p, direccion_p, precio_p, tipo_p, area_p, estado_p);
-
-end$$
+	end$$
 delimiter ;
 
 delimiter $$
@@ -186,13 +174,13 @@ delimiter $$
 delimiter ;
 
 delimiter $$
-create procedure sp_buscar_propiedades(in termino_p varchar(150))
-begin
-	select id_propiedad, codigo_interno, direccion, precio, tipo_propiedad, area, estado_propiedad
-    from Propiedad
-    where codigo_interno like concat('%', termino_p, '%')
-       or direccion like concat('%', termino_p, '%');
-end$$
+	create procedure sp_buscar_propiedades(in termino_p varchar(150))
+	begin
+		select id_propiedad, codigo_interno, direccion, precio, tipo_propiedad, area, estado_propiedad
+		from Propiedad
+		where codigo_interno like concat('%', termino_p, '%')
+		   or direccion like concat('%', termino_p, '%');
+	end$$
 delimiter ;
 
 #-------------------CLIENTE-----------------------------

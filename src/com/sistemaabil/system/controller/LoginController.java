@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -30,10 +31,10 @@ public class LoginController implements Initializable {
     private Hyperlink lnkRegistro;
 
     @FXML
-    private PasswordField pwdPassword;
+    private PasswordField pwdPassword2;
 
     @FXML
-    private TextField txtCorreo;
+    private TextField txtCorreo2;
 
     private final UserRepository userRepository = new UserRepository();
 
