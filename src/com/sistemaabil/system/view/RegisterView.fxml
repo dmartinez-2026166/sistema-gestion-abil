@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -15,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="274.0" spacing="10.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemaabil.system.controller.RegisterController">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="274.0" spacing="10.0" stylesheets="@../resources/styles/AppStyles.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemaabil.system.controller.RegisterController">
 
     <children>
 
@@ -92,9 +90,9 @@
 
             <children>
 
-                <Button fx:id="btnCancelar" onAction="#onCancelar" text="CANCELAR" />
+                <Button fx:id="btnCancelar" onAction="#onCancelar" styleClass="btn-secondary" text="CANCELAR" />
 
-                <Button fx:id="btnGuardar" onAction="#onGuardar" text="GUARDAR" />
+                <Button fx:id="btnGuardar" onAction="#onGuardar" styleClass="btn-primary" text="GUARDAR" />
 
             </children>
 

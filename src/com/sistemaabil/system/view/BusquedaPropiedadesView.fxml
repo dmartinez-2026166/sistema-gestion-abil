@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox spacing="12.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemaabil.system.controller.BusquedaPropiedadesController">
+<VBox spacing="12.0" stylesheets="@../resources/styles/AppStyles.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemaabil.system.controller.BusquedaPropiedadesController">
     <padding>
         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
     </padding>
@@ -26,7 +26,7 @@
             <children>
                 <TextField fx:id="txtBusqueda" prefWidth="300.0" promptText="Código interno o dirección" />
                 <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#onBuscar" text="BUSCAR" />
-                <Button fx:id="btnNuevaPropiedad" mnemonicParsing="false" onAction="#onNuevaPropiedad" text="NUEVA PROPIEDAD" visible="false" managed="false" />
+                <Button fx:id="btnNuevaPropiedad" managed="false" mnemonicParsing="false" onAction="#onNuevaPropiedad" text="NUEVA PROPIEDAD" visible="false" />
                 <Button fx:id="btnCerrarSesion" mnemonicParsing="false" onAction="#onCerrarSesion" text="CERRAR SESIÓN" />
             </children>
         </HBox>
