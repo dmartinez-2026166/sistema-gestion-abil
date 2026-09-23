@@ -19,10 +19,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-/**
- * Vista de solo consulta que usan Cliente, Supervisor y Agente Inmobiliario. El
- * Agente ademas ve el boton "NUEVA PROPIEDAD" (los otros dos roles no).
- */
 public class BusquedaPropiedadesController implements Initializable {
 
     @FXML
@@ -79,7 +75,6 @@ public class BusquedaPropiedadesController implements Initializable {
         btnNuevaPropiedad.setVisible(esAgente);
         btnNuevaPropiedad.setManaged(esAgente);
 
-        // arranca vacia; solo se llena cuando el usuario busca algo
         lblMensaje.setText("Escribe un código o dirección y presiona BUSCAR.");
     }
 
