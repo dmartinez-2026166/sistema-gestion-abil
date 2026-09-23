@@ -50,10 +50,10 @@ delimiter $$
 									in clave_p varchar(60),
 									in correo_p varchar(100),
 									in rol_p varchar(30))
-		begin
-			insert into Usuario (id_usuario, usuario, clave, correo, rol)
-			values(id_usuario, usuario_p, clave_p, correo_p, rol_p);						
-		end$$
+	begin
+		insert into Usuario (usuario, clave, correo, rol)
+		values(usuario_p, clave_p, correo_p, rol_p);
+	end$$
 delimiter ;
 
 #-------------------ADMINISTRADOR-------------------------------------
@@ -170,6 +170,16 @@ delimiter $$
 			area = area_p,
 			estado_propiedad = estado_p
 		where id_propiedad = id_propiedad_p;
+	end$$
+delimiter ;
+
+delimiter $$
+	create procedure sp_buscar_propiedades(in termino_p varchar(150))
+	begin
+		select id_propiedad, codigo_interno, direccion, precio, tipo_propiedad, area, estado_propiedad
+		from Propiedad
+		where codigo_interno like concat('%', termino_p, '%')
+		   or direccion like concat('%', termino_p, '%');
 	end$$
 delimiter ;
 

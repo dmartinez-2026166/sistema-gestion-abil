@@ -1,4 +1,7 @@
 src/com/sistemaabil/system/config/Enviroment.java
+src/com/sistemaabil/system/config/parche_datos_propiedades.sql
+src/com/sistemaabil/system/config/parche_sp_buscar_propiedades.sql
+src/com/sistemaabil/system/config/parche_sp_crear_usuarios.sql
 dist/*
 build/*
 /nbproject/private/

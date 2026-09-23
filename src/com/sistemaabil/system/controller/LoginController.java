@@ -2,15 +2,15 @@ package com.sistemaabil.system.controller;
 
 import com.sistemaabil.system.model.Usuario;
 import com.sistemaabil.system.repository.UserRepository;
+import com.sistemaabil.system.utils.Sesion;
 import com.sistemaabil.system.utils.ViewFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -18,39 +18,23 @@ import javafx.scene.input.MouseEvent;
 public class LoginController implements Initializable {
 
     @FXML
-    private Button btnIniciarSesion;
+    private TextField txtCorreo;
 
     @FXML
-    private Label lblCorreo;
-
-    @FXML
-    private Label lblPassword;
+    private PasswordField pwdPassword;
 
     @FXML
     private Label lblError;
 
+
     @FXML
     private Hyperlink lnkRegistro;
 
-/**
- *
- * @author diego
- */
-public class LoginController implements Initializable {
-    
-         @Override
-         public void initialize(URL url, ResourceBundle rb) {
-        
-         }
-         
-        @FXML
-        public void onRegister(MouseEvent event){
-        ViewFactory viewFacto = new ViewFactory();
-        viewFacto.viewRegister();
-    }
+    @FXML
+    private PasswordField pwdPassword2;
 
     @FXML
-    private TextField txtCorreo;
+    private TextField txtCorreo2;
 
     private final UserRepository userRepository = new UserRepository();
 
@@ -79,8 +63,14 @@ public class LoginController implements Initializable {
         }
 
         mostrarError("");
+        Sesion.setUsuarioActual(usuario);
         ViewFactory viewFacto = new ViewFactory();
-        viewFacto.viewPanel();
+
+        switch (usuario.getRol()) {
+            case "Administrador" -> viewFacto.viewPanel();
+            case "Agente Inmobiliario", "Supervisor", "Cliente" -> viewFacto.viewBusquedaPropiedades();
+            default -> mostrarError("Rol desconocido: " + usuario.getRol());
+        }
     }
 
     @FXML
