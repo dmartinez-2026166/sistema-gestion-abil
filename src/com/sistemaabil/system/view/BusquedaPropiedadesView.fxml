@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox spacing="12.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemaabil.system.controller.BusquedaPropiedadesController">
+<VBox spacing="12.0" stylesheets="@../resources/styles/AppStyles.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemaabil.system.controller.BusquedaPropiedadesController">
     <padding>
         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
     </padding>
 
     <children>
-        <Label text="BUSCAR PROPIEDAD">
+        <Label styleClass="title-label" text="BUSCAR PROPIEDAD">
             <font>
                 <Font name="Arial Black" size="18.0" />
             </font>
@@ -25,13 +25,13 @@
         <HBox spacing="10.0">
             <children>
                 <TextField fx:id="txtBusqueda" prefWidth="300.0" promptText="Código interno o dirección" />
-                <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#onBuscar" text="BUSCAR" />
-                <Button fx:id="btnNuevaPropiedad" mnemonicParsing="false" onAction="#onNuevaPropiedad" text="NUEVA PROPIEDAD" visible="false" managed="false" />
-                <Button fx:id="btnCerrarSesion" mnemonicParsing="false" onAction="#onCerrarSesion" text="CERRAR SESIÓN" />
+                <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#onBuscar" styleClass="btn-primary" text="BUSCAR" />
+                <Button fx:id="btnNuevaPropiedad" mnemonicParsing="false" onAction="#onNuevaPropiedad" styleClass="btn-accent" text="NUEVA PROPIEDAD" visible="false" managed="false" />
+                <Button fx:id="btnCerrarSesion" mnemonicParsing="false" onAction="#onCerrarSesion" styleClass="btn-secondary" text="CERRAR SESIÓN" />
             </children>
         </HBox>
 
-        <Label fx:id="lblMensaje" textFill="RED" />
+        <Label fx:id="lblMensaje" styleClass="error-label" />
 
         <TableView fx:id="tblResultados" prefHeight="350.0" prefWidth="600.0">
             <columns>

@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.sistemaabil.system.model;
 
-/**
- *
- * @author diego
- */
-public class Model {
+public abstract class Model {
     
+    public abstract int getId();
+    
+    public boolean esNueva() {
+        return getId() == 0;
+    }
 }

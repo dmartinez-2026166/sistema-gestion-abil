@@ -1,6 +1,6 @@
 package com.sistemaabil.system.model;
 
-public class Propiedad {
+public class Propiedad extends Model{
 
     private int idPropiedad;
     private String codigoInterno;
@@ -8,13 +8,13 @@ public class Propiedad {
     private double precio;
     private String tipoPropiedad;
     private double area;
-    private String estadoPropiedad;
+    private EstadoPropiedad estadoPropiedad;
 
     public Propiedad() {
     }
 
     public Propiedad(int idPropiedad, String codigoInterno, String direccion, double precio,
-            String tipoPropiedad, double area, String estadoPropiedad) {
+            String tipoPropiedad, double area, EstadoPropiedad estadoPropiedad) {
         this.idPropiedad = idPropiedad;
         this.codigoInterno = codigoInterno;
         this.direccion = direccion;
@@ -24,6 +24,11 @@ public class Propiedad {
         this.estadoPropiedad = estadoPropiedad;
     }
 
+    @Override
+    public int getId() {
+        return idPropiedad;
+    }
+    
     public int getIdPropiedad() {
         return idPropiedad;
     }
@@ -72,11 +77,11 @@ public class Propiedad {
         this.area = area;
     }
 
-    public String getEstadoPropiedad() {
+    public EstadoPropiedad getEstadoPropiedad() {
         return estadoPropiedad;
     }
 
-    public void setEstadoPropiedad(String estadoPropiedad) {
+    public void setEstadoPropiedad(EstadoPropiedad estadoPropiedad) {
         this.estadoPropiedad = estadoPropiedad;
     }
 }

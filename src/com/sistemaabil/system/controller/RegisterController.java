@@ -1,8 +1,10 @@
 package com.sistemaabil.system.controller;
 
+import com.sistemaabil.system.model.EstadoPropiedad;
 import com.sistemaabil.system.model.Propiedad;
-import com.sistemaabil.system.repository.PropiedadRepository;
-import com.sistemaabil.system.utils.Sesion;
+import com.sistemaabil.system.service.PropertyStatus;
+import com.sistemaabil.system.service.PropiedadService;
+import com.sistemaabil.system.service.UsuarioService;
 import com.sistemaabil.system.utils.ViewFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,7 +35,7 @@ public class RegisterController implements Initializable {
     private TextField txtPrecio;
 
     @FXML
-    private ComboBox<String> cmbEstado;
+    private ComboBox<EstadoPropiedad> cmbEstado;
 
     @FXML
     private Label lblMensaje;
@@ -44,105 +46,85 @@ public class RegisterController implements Initializable {
     @FXML
     private Button btnCancelar;
 
-    private final PropiedadRepository propiedadRepository = new PropiedadRepository();
-    private boolean modoEdicion = false;
+    private final PropiedadService propiedadService = new PropiedadService();
+    private final UsuarioService usuarioService = new UsuarioService();
+    private final ViewFactory viewFactory = new ViewFactory();
+    private Propiedad propiedadEnEdicion;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cmbTipo.setItems(FXCollections.observableArrayList("Casa", "Apartamento", "Terreno", "Local"));
-        cmbEstado.setItems(FXCollections.observableArrayList("Disponible", "Vendido", "Alquilado"));
+        cmbTipo.setItems(FXCollections.observableArrayList(propiedadService.getTipos()));
+        cmbEstado.setItems(FXCollections.observableArrayList(EstadoPropiedad.values()));
 
-        Propiedad propiedad = Sesion.getPropiedadEnEdicion();
+        propiedadEnEdicion = propiedadService.getPropiedadEnEdicion();
 
-        if (propiedad != null) {
-            modoEdicion = true;
-            txtCodigo.setText(propiedad.getCodigoInterno());
+        if (propiedadEnEdicion != null) {
+            txtCodigo.setText(propiedadEnEdicion.getCodigoInterno());
             txtCodigo.setDisable(true); // el codigo interno no se cambia al editar
-            txtDireccion.setText(propiedad.getDireccion());
-            cmbTipo.setValue(propiedad.getTipoPropiedad());
-            txtArea.setText(String.valueOf(propiedad.getArea()));
-            txtPrecio.setText(String.valueOf(propiedad.getPrecio()));
-            cmbEstado.setValue(propiedad.getEstadoPropiedad());
+            txtDireccion.setText(propiedadEnEdicion.getDireccion());
+            cmbTipo.setValue(propiedadEnEdicion.getTipoPropiedad());
+            txtArea.setText(String.valueOf(propiedadEnEdicion.getArea()));
+            txtPrecio.setText(String.valueOf(propiedadEnEdicion.getPrecio()));
+            cmbEstado.setValue(propiedadEnEdicion.getEstadoPropiedad());
             btnGuardar.setText("ACTUALIZAR");
         }
 
-        if (lblMensaje != null) {
-            lblMensaje.setText("");
-        }
+        lblMensaje.setText("");
     }
 
     @FXML
     public void onGuardar(ActionEvent event) {
-        String codigo = txtCodigo.getText() == null ? "" : txtCodigo.getText().trim();
-        String direccion = txtDireccion.getText() == null ? "" : txtDireccion.getText().trim();
+        String direccion = txtDireccion.getText();
         String tipo = cmbTipo.getValue();
-        String estado = cmbEstado.getValue();
-        String areaTexto = txtArea.getText() == null ? "" : txtArea.getText().trim();
-        String precioTexto = txtPrecio.getText() == null ? "" : txtPrecio.getText().trim();
+        EstadoPropiedad estado = cmbEstado.getValue();
+        Double area = leerNumero(txtArea);
+        Double precio = leerNumero(txtPrecio);
 
-        if (codigo.isBlank() || direccion.isBlank() || tipo == null || estado == null
-                || areaTexto.isBlank() || precioTexto.isBlank()) {
-            mostrarMensaje("Completa todos los campos.");
-            return;
+        PropertyStatus resultado = (propiedadEnEdicion != null)
+                ? propiedadService.actualizar(propiedadEnEdicion, direccion, tipo, area, precio, estado)
+                : propiedadService.crear(txtCodigo.getText(), direccion, tipo, area, precio, estado);
+
+        switch (resultado) {
+            case EMPTY_FIELDS -> mostrarMensaje("Completa todos los campos.");
+            case INVALID_VALUES -> mostrarMensaje("Área y precio deben ser números mayores que cero.");
+            case ERROR_PROPERTY_CREATE -> mostrarMensaje("No se pudo guardar. ¿El código ya existe?");
+            case ERROR_PROPERTY_UPDATE -> mostrarMensaje("No se pudo actualizar la propiedad.");
+            case PROPERTY_CREATED, PROPERTY_UPDATED -> {
+                propiedadService.finalizarEdicion();
+                volverSegunRol();
+            }
         }
-
-        double area;
-        double precio;
-
-        try {
-            area = Double.parseDouble(areaTexto);
-            precio = Double.parseDouble(precioTexto);
-        } catch (NumberFormatException nfe) {
-            mostrarMensaje("Área y precio deben ser números.");
-            return;
-        }
-
-        boolean exito;
-
-        if (modoEdicion) {
-            Propiedad propiedad = Sesion.getPropiedadEnEdicion();
-            propiedad.setDireccion(direccion);
-            propiedad.setTipoPropiedad(tipo);
-            propiedad.setArea(area);
-            propiedad.setPrecio(precio);
-            propiedad.setEstadoPropiedad(estado);
-            exito = propiedadRepository.actualizar(propiedad);
-        } else {
-            Propiedad propiedad = new Propiedad(0, codigo, direccion, precio, tipo, area, estado);
-            exito = propiedadRepository.crear(propiedad);
-        }
-
-        if (!exito) {
-            mostrarMensaje(modoEdicion
-                    ? "No se pudo actualizar la propiedad."
-                    : "No se pudo guardar. ¿El código ya existe?");
-            return;
-        }
-
-        Sesion.setPropiedadEnEdicion(null);
-        volverSegunRol();
     }
 
     @FXML
     public void onCancelar(ActionEvent event) {
-        Sesion.setPropiedadEnEdicion(null);
+        propiedadService.finalizarEdicion();
         volverSegunRol();
     }
 
-    private void volverSegunRol() {
-        ViewFactory viewFacto = new ViewFactory();
+    /**
+     * Convierte el texto del campo a número (conversión de la vista al modelo).
+     * Vacío -> null; texto que no es número -> NaN. Las reglas de validación las aplica el service.
+     */
+    private Double leerNumero(TextField campo) {
+        String texto = campo.getText() == null ? "" : campo.getText().trim();
 
-        if (Sesion.getUsuarioActual() != null
-                && "Administrador".equals(Sesion.getUsuarioActual().getRol())) {
-            viewFacto.viewPanel();
-        } else {
-            viewFacto.viewBusquedaPropiedades();
+        if (texto.isEmpty()) {
+            return null;
+        }
+
+        try {
+            return Double.valueOf(texto);
+        } catch (NumberFormatException nfe) {
+            return Double.NaN;
         }
     }
 
+    private void volverSegunRol() {
+        viewFactory.viewInicio(usuarioService.getRolActual());
+    }
+
     private void mostrarMensaje(String mensaje) {
-        if (lblMensaje != null) {
-            lblMensaje.setText(mensaje);
-        }
+        lblMensaje.setText(mensaje);
     }
 }

@@ -1,8 +1,7 @@
 package com.sistemaabil.system.controller;
 
-import com.sistemaabil.system.model.Usuario;
-import com.sistemaabil.system.repository.UserRepository;
-import com.sistemaabil.system.utils.Sesion;
+import com.sistemaabil.system.service.LoginStatus;
+import com.sistemaabil.system.service.UsuarioService;
 import com.sistemaabil.system.utils.ViewFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,58 +29,35 @@ public class LoginController implements Initializable {
     @FXML
     private Hyperlink lnkRegistro;
 
-    @FXML
-    private PasswordField pwdPassword2;
-
-    @FXML
-    private TextField txtCorreo2;
-
-    private final UserRepository userRepository = new UserRepository();
+    private final UsuarioService usuarioService = new UsuarioService();
+    private final ViewFactory viewFactory = new ViewFactory();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        if (lblError != null) {
-            lblError.setText("");
-        }
+        lblError.setText("");
     }
 
     @FXML
     public void onLogin(ActionEvent event) {
-        String correo = txtCorreo.getText() == null ? "" : txtCorreo.getText().trim();
-        String clave = pwdPassword.getText() == null ? "" : pwdPassword.getText();
+        LoginStatus resultado = usuarioService.iniciarSesion(txtCorreo.getText(), pwdPassword.getText());
 
-        if (correo.isBlank() || clave.isBlank()) {
-            mostrarError("Ingresa tu correo y tu clave.");
-            return;
-        }
-
-        Usuario usuario = userRepository.autenticar(correo, clave);
-
-        if (usuario == null) {
-            mostrarError("Correo o clave incorrectos.");
-            return;
-        }
-
-        mostrarError("");
-        Sesion.setUsuarioActual(usuario);
-        ViewFactory viewFacto = new ViewFactory();
-
-        switch (usuario.getRol()) {
-            case "Administrador" -> viewFacto.viewPanel();
-            case "Agente Inmobiliario", "Supervisor", "Cliente" -> viewFacto.viewBusquedaPropiedades();
-            default -> mostrarError("Rol desconocido: " + usuario.getRol());
+        switch (resultado) {
+            case EMPTY_FIELDS -> mostrarError("Ingresa tu correo y tu clave.");
+            case INVALID_CREDENTIALS -> mostrarError("Correo o clave incorrectos.");
+            case UNKNOWN_ROLE -> mostrarError("El usuario tiene un rol desconocido.");
+            case LOGIN_OK -> {
+                mostrarError("");
+                viewFactory.viewInicio(usuarioService.getRolActual());
+            }
         }
     }
 
     @FXML
     public void onRegister(MouseEvent event) {
-        ViewFactory viewFacto = new ViewFactory();
-        viewFacto.viewRegisterUser();
+        viewFactory.viewRegisterUser();
     }
 
     private void mostrarError(String mensaje) {
-        if (lblError != null) {
-            lblError.setText(mensaje);
-        }
+        lblError.setText(mensaje);
     }
 }

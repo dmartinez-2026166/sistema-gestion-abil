@@ -1,17 +1,17 @@
 package com.sistemaabil.system.model;
 
-public class Usuario {
+public class Usuario extends Model{
 
     private int idUsuario;
     private String usuario;
     private String clave;
     private String correo;
-    private String rol;
+    private Rol rol;
 
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String usuario, String clave, String correo, String rol) {
+    public Usuario(int idUsuario, String usuario, String clave, String correo, Rol rol) {
         this.idUsuario = idUsuario;
         this.usuario = usuario;
         this.clave = clave;
@@ -19,6 +19,11 @@ public class Usuario {
         this.rol = rol;
     }
 
+    @Override
+    public int getId() {
+        return idUsuario;
+    }
+    
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -51,11 +56,11 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
 }

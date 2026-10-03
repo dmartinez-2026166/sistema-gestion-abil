@@ -1,6 +1,8 @@
 package com.sistemaabil.system.controller;
 
-import com.sistemaabil.system.repository.UserRepository;
+import com.sistemaabil.system.model.Rol;
+import com.sistemaabil.system.service.UserStatus;
+import com.sistemaabil.system.service.UsuarioService;
 import com.sistemaabil.system.utils.ViewFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,7 +31,7 @@ public class RegisterUserController implements Initializable {
     private PasswordField pwdConfirmarClave;
 
     @FXML
-    private ComboBox<String> cmbRol;
+    private ComboBox<Rol> cmbRol;
 
     @FXML
     private Label lblMensaje;
@@ -40,54 +42,37 @@ public class RegisterUserController implements Initializable {
     @FXML
     private Button btnCancelar;
 
-    private final UserRepository userRepository = new UserRepository();
+    private final UsuarioService usuarioService = new UsuarioService();
+    private final ViewFactory viewFactory = new ViewFactory();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cmbRol.setItems(FXCollections.observableArrayList(
-                "Administrador", "Supervisor", "Agente Inmobiliario", "Cliente"
-        ));
+        cmbRol.setItems(FXCollections.observableArrayList(Rol.values()));
         lblMensaje.setText("");
     }
 
     @FXML
     public void onRegistrar(ActionEvent event) {
-        String usuario = txtUsuario.getText() == null ? "" : txtUsuario.getText().trim();
-        String correo = txtCorreo.getText() == null ? "" : txtCorreo.getText().trim();
-        String clave = pwdClave.getText() == null ? "" : pwdClave.getText();
-        String confirmar = pwdConfirmarClave.getText() == null ? "" : pwdConfirmarClave.getText();
-        String rol = cmbRol.getValue();
+        UserStatus resultado = usuarioService.registrarUsuario(
+                txtUsuario.getText(),
+                txtCorreo.getText(),
+                pwdClave.getText(),
+                pwdConfirmarClave.getText(),
+                cmbRol.getValue());
 
-        if (usuario.isBlank() || correo.isBlank() || clave.isBlank() || rol == null) {
-            mostrarMensaje("Completa todos los campos.");
-            return;
+        switch (resultado) {
+            case EMPTY_FIELDS -> mostrarMensaje("Completa todos los campos.");
+            case PASSWORD_MISMATCH -> mostrarMensaje("Las claves no coinciden.");
+            case PASSWORD_TOO_SHORT -> mostrarMensaje("La clave debe tener al menos 6 caracteres.");
+            case USER_EXISTS -> mostrarMensaje("El correo ya está registrado.");
+            case ERROR_USER_CREATE -> mostrarMensaje("No se pudo crear el usuario.");
+            case USER_CREATED -> viewFactory.viewLogin();
         }
-
-        if (!clave.equals(confirmar)) {
-            mostrarMensaje("Las claves no coinciden.");
-            return;
-        }
-
-        if (clave.length() < 6) {
-            mostrarMensaje("La clave debe tener al menos 6 caracteres.");
-            return;
-        }
-
-        boolean creado = userRepository.crearUsuario(usuario, clave, correo, rol);
-
-        if (!creado) {
-            mostrarMensaje("No se pudo crear el usuario. ¿El correo ya está registrado?");
-            return;
-        }
-
-        ViewFactory viewFacto = new ViewFactory();
-        viewFacto.viewLogin();
     }
 
     @FXML
     public void onCancelar(ActionEvent event) {
-        ViewFactory viewFacto = new ViewFactory();
-        viewFacto.viewLogin();
+        viewFactory.viewLogin();
     }
 
     private void mostrarMensaje(String mensaje) {

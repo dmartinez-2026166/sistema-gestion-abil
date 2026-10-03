@@ -1,12 +1,17 @@
 package com.sistemaabil.system.utils;
 
 import com.sistemaabil.system.ClasePrincipal;
+import com.sistemaabil.system.model.Propiedad;
+import com.sistemaabil.system.model.Rol;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 
 public class ViewFactory {
 
@@ -83,5 +88,35 @@ public class ViewFactory {
 
     public void viewLogin() {
         loadScene("login");
+    }
+
+    /** Pantalla de inicio según el rol: el administrador va al panel; los demás, a la búsqueda. */
+    public void viewInicio(Rol rol) {
+        if (rol == Rol.ADMINISTRADOR) {
+            viewPanel();
+        } else {
+            viewBusquedaPropiedades();
+        }
+    }
+
+    public void mostrarDetallePropiedad(Propiedad propiedad) {
+        Alert alerta = new Alert(AlertType.INFORMATION);
+        alerta.setTitle("Detalle de propiedad");
+        alerta.setHeaderText(propiedad.getCodigoInterno());
+        alerta.setContentText(
+                "Dirección: " + propiedad.getDireccion() + "\n"
+                + "Tipo: " + propiedad.getTipoPropiedad() + "\n"
+                + "Área: " + propiedad.getArea() + " m²\n"
+                + "Precio: " + propiedad.getPrecio() + "\n"
+                + "Estado: " + propiedad.getEstadoPropiedad()
+        );
+        alerta.showAndWait();
+    }
+
+    /** Muestra un diálogo de confirmación y devuelve true si el usuario aceptó. */
+    public boolean confirmar(String mensaje) {
+        Alert confirmacion = new Alert(AlertType.CONFIRMATION, mensaje);
+        confirmacion.showAndWait();
+        return confirmacion.getResult() == ButtonType.OK;
     }
 }
