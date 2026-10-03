@@ -25,6 +25,7 @@ public class LoginController implements Initializable {
     @FXML
     private Label lblError;
 
+
     @FXML
     private Hyperlink lnkRegistro;
 

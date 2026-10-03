@@ -4,4 +4,3 @@
 /src/com/sistemaabil/system/config/parche_sp_crear_usuarios.sql
 dist/*
 build/*
-/nbproject/private/
