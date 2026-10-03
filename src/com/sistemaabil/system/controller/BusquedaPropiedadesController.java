@@ -1,8 +1,9 @@
 package com.sistemaabil.system.controller;
 
+import com.sistemaabil.system.model.EstadoPropiedad;
 import com.sistemaabil.system.model.Propiedad;
-import com.sistemaabil.system.repository.PropiedadRepository;
-import com.sistemaabil.system.utils.Sesion;
+import com.sistemaabil.system.service.PropiedadService;
+import com.sistemaabil.system.service.UsuarioService;
 import com.sistemaabil.system.utils.ViewFactory;
 import java.net.URL;
 import java.util.List;
@@ -55,9 +56,11 @@ public class BusquedaPropiedadesController implements Initializable {
     private TableColumn<Propiedad, Double> colPrecio;
 
     @FXML
-    private TableColumn<Propiedad, String> colEstado;
+    private TableColumn<Propiedad, EstadoPropiedad> colEstado;
 
-    private final PropiedadRepository propiedadRepository = new PropiedadRepository();
+    private final PropiedadService propiedadService = new PropiedadService();
+    private final UsuarioService usuarioService = new UsuarioService();
+    private final ViewFactory viewFactory = new ViewFactory();
     private final ObservableList<Propiedad> resultados = FXCollections.observableArrayList();
 
     @Override
@@ -70,10 +73,9 @@ public class BusquedaPropiedadesController implements Initializable {
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estadoPropiedad"));
         tblResultados.setItems(resultados);
 
-        boolean esAgente = Sesion.getUsuarioActual() != null
-                && "Agente Inmobiliario".equals(Sesion.getUsuarioActual().getRol());
-        btnNuevaPropiedad.setVisible(esAgente);
-        btnNuevaPropiedad.setManaged(esAgente);
+        boolean puedeRegistrar = usuarioService.puedeRegistrarPropiedades();
+        btnNuevaPropiedad.setVisible(puedeRegistrar);
+        btnNuevaPropiedad.setManaged(puedeRegistrar);
 
         // arranca vacia; solo se llena cuando el usuario busca algo
         lblMensaje.setText("Escribe un código o dirección y presiona BUSCAR.");
@@ -81,33 +83,28 @@ public class BusquedaPropiedadesController implements Initializable {
 
     @FXML
     public void onBuscar(ActionEvent event) {
-        String termino = txtBusqueda.getText() == null ? "" : txtBusqueda.getText().trim();
+        String termino = txtBusqueda.getText();
 
-        if (termino.isBlank()) {
+        if (termino == null || termino.isBlank()) {
             resultados.clear();
             lblMensaje.setText("Escribe un código o dirección para buscar.");
             return;
         }
 
-        buscar(termino);
+        List<Propiedad> encontradas = propiedadService.buscar(termino);
+        resultados.setAll(encontradas);
+        lblMensaje.setText(encontradas.isEmpty() ? "No se encontraron propiedades." : "");
     }
 
     @FXML
     public void onNuevaPropiedad(ActionEvent event) {
-        Sesion.setPropiedadEnEdicion(null);
-        new ViewFactory().viewRegister();
+        propiedadService.finalizarEdicion();
+        viewFactory.viewRegister();
     }
 
     @FXML
     public void onCerrarSesion(ActionEvent event) {
-        Sesion.cerrarSesion();
-        new ViewFactory().viewLogin();
-    }
-
-    private void buscar(String termino) {
-        List<Propiedad> encontradas = propiedadRepository.buscarPorCodigoODireccion(termino);
-        resultados.setAll(encontradas);
-
-        lblMensaje.setText(encontradas.isEmpty() ? "No se encontraron propiedades." : "");
+        usuarioService.cerrarSesion();
+        viewFactory.viewLogin();
     }
 }
