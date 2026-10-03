@@ -16,20 +16,20 @@ public class ConexionDB {
         } catch (ClassNotFoundException classNotFound) {
             System.out.println("Error clase no encontrada");
         } catch (SQLException sqlException) {
-            System.out.println("error de conexion a db");
+            System.out.println("error de conexion a db: " + sqlException.getMessage());
         } catch (Exception e) {
             System.out.println("error padre" + e.getMessage());
         }
     }
-
+    
     public static ConexionDB getInstanciaConexionDB() {
         if (instanciaConexionDB == null) {
             instanciaConexionDB = new ConexionDB();
         }
         return instanciaConexionDB;
-
+        
     }
-
+    
     public Connection getConnection() {
         return connection;
     }

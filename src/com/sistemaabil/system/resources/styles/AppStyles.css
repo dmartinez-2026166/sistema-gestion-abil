@@ -1,0 +1,203 @@
+.root {
+    /* ---- Paleta ---- */
+    -color-primary: #1b4965;
+    -color-primary-dark: #123449;
+    -color-primary-light: #2f6690;
+    -color-accent: #ff8c42;
+    -color-accent-dark: #e06d1f;
+    -color-success: #2e7d32;
+    -color-danger: #c0392b;
+    -color-danger-dark: #a5311f;
+    -color-bg: #f2f4f7;
+    -color-surface: #ffffff;
+    -color-text: #1f2933;
+    -color-text-muted: #6b7280;
+    -color-border: #d7dce1;
+
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-background-color: -color-bg;
+    -fx-text-fill: -color-text;
+}
+
+/* ---------------- Texto ---------------- */
+
+.title-label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-primary;
+}
+
+.subtitle-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-text-muted;
+}
+
+.field-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-muted;
+}
+
+.error-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-danger;
+    -fx-font-weight: bold;
+}
+
+.app-link {
+    -fx-text-fill: -color-accent;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent;
+}
+
+.app-link:hover {
+    -fx-text-fill: -color-accent-dark;
+    -fx-underline: true;
+}
+
+/* ---------------- Tarjeta / contenedor ---------------- */
+
+.card-panel {
+    -fx-background-color: -color-surface;
+    -fx-background-radius: 12;
+    -fx-padding: 30;
+    -fx-effect: dropshadow(gaussian, rgba(27,73,101,0.18), 18, 0.15, 0, 4);
+}
+
+/* ---------------- Campos de texto ---------------- */
+
+.text-field,
+.password-field,
+.combo-box {
+    -fx-background-color: -color-surface;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1.2;
+    -fx-padding: 6 10 6 10;
+    -fx-font-size: 13px;
+}
+
+.text-field:focused,
+.password-field:focused,
+.combo-box:focused {
+    -fx-border-color: -color-primary-light;
+    -fx-effect: dropshadow(gaussian, rgba(47,102,144,0.35), 6, 0.2, 0, 0);
+}
+
+.combo-box .list-cell {
+    -fx-padding: 4 8 4 8;
+}
+
+/* ---------------- Botones base ---------------- */
+
+.button {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 8 18 8 18;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.btn-primary {
+    -fx-background-color: -color-primary;
+    -fx-text-fill: white;
+}
+.btn-primary:hover {
+    -fx-background-color: -color-primary-light;
+}
+.btn-primary:pressed {
+    -fx-background-color: -color-primary-dark;
+}
+
+.btn-accent {
+    -fx-background-color: -color-accent;
+    -fx-text-fill: white;
+}
+.btn-accent:hover {
+    -fx-background-color: -color-accent-dark;
+}
+
+.btn-secondary {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-primary;
+    -fx-border-color: -color-primary;
+    -fx-border-width: 1.4;
+}
+.btn-secondary:hover {
+    -fx-background-color: derive(-color-primary, 92%);
+}
+
+.btn-danger {
+    -fx-background-color: -color-danger;
+    -fx-text-fill: white;
+}
+.btn-danger:hover {
+    -fx-background-color: -color-danger-dark;
+}
+
+/* ---------------- Tabla ---------------- */
+
+.table-view {
+    -fx-background-color: -color-surface;
+    -fx-background-radius: 8;
+    -fx-border-color: -color-border;
+    -fx-border-radius: 8;
+}
+.table-view .column-header-background {
+    -fx-background-color: -color-primary;
+    -fx-background-radius: 8 8 0 0;
+}
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: transparent;
+    -fx-size: 34px;
+}
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: center-left;
+}
+.table-row-cell {
+    -fx-background-color: -color-surface;
+    -fx-border-color: transparent transparent -color-border transparent;
+}
+.table-row-cell:odd {
+    -fx-background-color: derive(-color-bg, 20%);
+}
+.table-row-cell:selected {
+    -fx-background-color: derive(-color-primary-light, 60%);
+    -fx-text-fill: -color-text;
+}
+
+/* ---------------- Barra lateral / superior (Panel de control) ---------------- */
+
+.topbar {
+    -fx-background-color: -color-primary;
+}
+.topbar .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.sidebar {
+    -fx-background-color: -color-primary-dark;
+    -fx-padding: 15 10 15 10;
+}
+.sidebar .label {
+    -fx-text-fill: derive(-color-accent, 30%);
+}
+.sidebar .button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+    -fx-max-width: infinity;
+}
+.sidebar .button:hover {
+    -fx-background-color: -color-primary-light;
+}
+
+.separator *.line {
+    -fx-border-color: -color-border;
+}
