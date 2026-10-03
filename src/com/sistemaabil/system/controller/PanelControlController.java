@@ -1,8 +1,9 @@
 package com.sistemaabil.system.controller;
 
+import com.sistemaabil.system.model.EstadoPropiedad;
 import com.sistemaabil.system.model.Propiedad;
-import com.sistemaabil.system.repository.PropiedadRepository;
-import com.sistemaabil.system.utils.Sesion;
+import com.sistemaabil.system.service.PropiedadService;
+import com.sistemaabil.system.service.UsuarioService;
 import com.sistemaabil.system.utils.ViewFactory;
 import java.net.URL;
 import java.util.List;
@@ -12,10 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -79,9 +77,11 @@ public class PanelControlController implements Initializable {
     private TableColumn<Propiedad, Double> colPrecio;
 
     @FXML
-    private TableColumn<Propiedad, String> colEstado;
+    private TableColumn<Propiedad, EstadoPropiedad> colEstado;
 
-    private final PropiedadRepository propiedadRepository = new PropiedadRepository();
+    private final PropiedadService propiedadService = new PropiedadService();
+    private final UsuarioService usuarioService = new UsuarioService();
+    private final ViewFactory viewFactory = new ViewFactory();
     private final ObservableList<Propiedad> propiedades = FXCollections.observableArrayList();
 
     @Override
@@ -104,31 +104,30 @@ public class PanelControlController implements Initializable {
 
     @FXML
     public void onFiltroDisponibles(ActionEvent event) {
-        cargarPropiedades("Disponible");
+        cargarPropiedades(EstadoPropiedad.DISPONIBLE);
     }
 
     @FXML
     public void onFiltroVendidas(ActionEvent event) {
-        cargarPropiedades("Vendido");
+        cargarPropiedades(EstadoPropiedad.VENDIDO);
     }
 
     @FXML
     public void onFiltroAlquiladas(ActionEvent event) {
-        cargarPropiedades("Alquilado");
+        cargarPropiedades(EstadoPropiedad.ALQUILADO);
     }
 
     @FXML
     public void onBuscar(ActionEvent event) {
-        String termino = txtBuscar.getText() == null ? "" : txtBuscar.getText().trim();
-        List<Propiedad> encontradas = propiedadRepository.buscarPorCodigoODireccion(termino);
+        List<Propiedad> encontradas = propiedadService.buscar(txtBuscar.getText());
         propiedades.setAll(encontradas);
         mostrarMensaje(encontradas.isEmpty() ? "No se encontraron propiedades." : "");
     }
 
     @FXML
     public void onNuevaPropiedad(ActionEvent event) {
-        Sesion.setPropiedadEnEdicion(null);
-        new ViewFactory().viewRegister();
+        propiedadService.finalizarEdicion();
+        viewFactory.viewRegister();
     }
 
     @FXML
@@ -140,17 +139,7 @@ public class PanelControlController implements Initializable {
             return;
         }
 
-        Alert alerta = new Alert(AlertType.INFORMATION);
-        alerta.setTitle("Detalle de propiedad");
-        alerta.setHeaderText(seleccionada.getCodigoInterno());
-        alerta.setContentText(
-                "Dirección: " + seleccionada.getDireccion() + "\n"
-                + "Tipo: " + seleccionada.getTipoPropiedad() + "\n"
-                + "Área: " + seleccionada.getArea() + " m²\n"
-                + "Precio: " + seleccionada.getPrecio() + "\n"
-                + "Estado: " + seleccionada.getEstadoPropiedad()
-        );
-        alerta.showAndWait();
+        viewFactory.mostrarDetallePropiedad(seleccionada);
     }
 
     @FXML
@@ -162,8 +151,8 @@ public class PanelControlController implements Initializable {
             return;
         }
 
-        Sesion.setPropiedadEnEdicion(seleccionada);
-        new ViewFactory().viewRegister();
+        propiedadService.iniciarEdicion(seleccionada);
+        viewFactory.viewRegister();
     }
 
     @FXML
@@ -175,25 +164,24 @@ public class PanelControlController implements Initializable {
             return;
         }
 
-        Alert confirmacion = new Alert(AlertType.CONFIRMATION,
-                "¿Eliminar la propiedad " + seleccionada.getCodigoInterno() + "?");
-        confirmacion.showAndWait();
-
-        if (confirmacion.getResult() == ButtonType.OK) {
-            boolean exito = propiedadRepository.eliminar(seleccionada.getIdPropiedad());
-            mostrarMensaje(exito ? "" : "No se pudo eliminar la propiedad.");
+        if (viewFactory.confirmar("¿Eliminar la propiedad " + seleccionada.getCodigoInterno() + "?")) {
+            boolean exito = propiedadService.eliminar(seleccionada);
             cargarPropiedades(null);
+
+            if (!exito) {
+                mostrarMensaje("No se pudo eliminar la propiedad.");
+            }
         }
     }
 
     @FXML
     public void onCerrarSesion(ActionEvent event) {
-        Sesion.cerrarSesion();
-        new ViewFactory().viewLogin();
+        usuarioService.cerrarSesion();
+        viewFactory.viewLogin();
     }
 
-    private void cargarPropiedades(String estado) {
-        propiedades.setAll(propiedadRepository.listarPorEstado(estado));
+    private void cargarPropiedades(EstadoPropiedad estado) {
+        propiedades.setAll(propiedadService.listar(estado));
         mostrarMensaje("");
     }
 

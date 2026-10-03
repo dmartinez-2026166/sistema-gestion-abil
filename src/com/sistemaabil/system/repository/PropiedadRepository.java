@@ -1,6 +1,7 @@
 package com.sistemaabil.system.repository;
 
 import com.sistemaabil.system.config.ConexionDB;
+import com.sistemaabil.system.model.EstadoPropiedad;
 import com.sistemaabil.system.model.Propiedad;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -9,25 +10,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PropiedadRepository {
+public class PropiedadRepository implements PropiedadInterface {
 
-    public List<Propiedad> listarPorEstado(String estado) {
-        String procedimiento;
+    @Override
+    public List<Propiedad> listarTodas() {
+        return ejecutarConsultaSinParametros("sp_leer_propiedades");
+    }
 
-        if (estado == null || estado.isBlank() || estado.equalsIgnoreCase("Todos")) {
-            procedimiento = "sp_leer_propiedades";
-        } else {
-            procedimiento = switch (estado) {
-                case "Disponible" -> "sp_supervisor_propiedades_disponibles";
-                case "Vendido" -> "sp_supervisor_propiedades_vendidos";
-                case "Alquilado" -> "sp_supervisor_propiedades_alquilados";
-                default -> "sp_leer_propiedades";
-            };
-        }
+    @Override
+    public List<Propiedad> listarPorEstado(EstadoPropiedad estado) {
+        String procedimiento = switch (estado) {
+            case DISPONIBLE -> "sp_supervisor_propiedades_disponibles";
+            case VENDIDO -> "sp_supervisor_propiedades_vendidos";
+            case ALQUILADO -> "sp_supervisor_propiedades_alquilados";
+        };
 
         return ejecutarConsultaSinParametros(procedimiento);
     }
 
+    @Override
     public List<Propiedad> buscarPorCodigoODireccion(String termino) {
         List<Propiedad> resultado = new ArrayList<>();
         Connection connection = ConexionDB.getInstanciaConexionDB().getConnection();
@@ -48,6 +49,7 @@ public class PropiedadRepository {
         return resultado;
     }
 
+    @Override
     public boolean crear(Propiedad propiedad) {
         Connection connection = ConexionDB.getInstanciaConexionDB().getConnection();
         String sql = "{call sp_crear_propiedad(?, ?, ?, ?, ?, ?)}";
@@ -58,7 +60,7 @@ public class PropiedadRepository {
             callableStatement.setDouble(3, propiedad.getPrecio());
             callableStatement.setString(4, propiedad.getTipoPropiedad());
             callableStatement.setDouble(5, propiedad.getArea());
-            callableStatement.setString(6, propiedad.getEstadoPropiedad());
+            callableStatement.setString(6, etiquetaDe(propiedad.getEstadoPropiedad()));
             callableStatement.execute();
             return true;
         } catch (SQLException sqlException) {
@@ -67,6 +69,7 @@ public class PropiedadRepository {
         }
     }
 
+    @Override
     public boolean actualizar(Propiedad propiedad) {
         Connection connection = ConexionDB.getInstanciaConexionDB().getConnection();
         String sql = "{call sp_actualizar_propiedad(?, ?, ?, ?, ?, ?)}";
@@ -77,7 +80,7 @@ public class PropiedadRepository {
             callableStatement.setDouble(3, propiedad.getPrecio());
             callableStatement.setString(4, propiedad.getTipoPropiedad());
             callableStatement.setDouble(5, propiedad.getArea());
-            callableStatement.setString(6, propiedad.getEstadoPropiedad());
+            callableStatement.setString(6, etiquetaDe(propiedad.getEstadoPropiedad()));
             callableStatement.execute();
             return true;
         } catch (SQLException sqlException) {
@@ -86,6 +89,7 @@ public class PropiedadRepository {
         }
     }
 
+    @Override
     public boolean eliminar(int idPropiedad) {
         Connection connection = ConexionDB.getInstanciaConexionDB().getConnection();
         String sql = "{call sp_eliminar_propiedad(?)}";
@@ -126,7 +130,11 @@ public class PropiedadRepository {
                 resultSet.getDouble("precio"),
                 resultSet.getString("tipo_propiedad"),
                 resultSet.getDouble("area"),
-                resultSet.getString("estado_propiedad")
+                EstadoPropiedad.fromEtiqueta(resultSet.getString("estado_propiedad"))
         );
+    }
+
+    private String etiquetaDe(EstadoPropiedad estado) {
+        return estado == null ? null : estado.getEtiqueta();
     }
 }
